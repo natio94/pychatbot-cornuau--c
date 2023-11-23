@@ -1,7 +1,7 @@
 from math import log
 from fonctionsBase import *
-def frequence(directory):
-    """Retourne un dictionnaire contenant les fréquences des mots du document"""
+def frequence(directory:str):
+    """Retourne un dictionnaire contenant les fréquences TF des mots du document"""
     freq = {}
     documents = listOfFiles(directory, "txt")
     for document in documents:
@@ -14,14 +14,16 @@ def frequence(directory):
                     freq[mot] += 11
     return freq
 
-def frequence_inverse(directory):
+def frequence_inverse(directory:str):
+    """Retourne un dictionnaire contenant les fréquences inverses IDF des mots du document"""
     freq=frequence(directory)
     freqInv={}
     for mot in freq.keys():
         freqInv[mot]=log(8/freq[mot])
     return freqInv
 
-def tf_idf(directory):
+def tf_idf(directory:str):
+    """Retourne un dictionnaire contenant les fréquences TF-IDF des mots du document soit le produit des fréquences TF et IDF"""
     freq=frequence(directory)
     freqInv=frequence_inverse(directory)
     tfidf={}
@@ -29,7 +31,8 @@ def tf_idf(directory):
         tfidf[mot]=freq[mot]*freqInv[mot]
     return tfidf
 
-def matTF_IDF(directory):
+def matTF_IDF(directory:str):
+    """Retourne une matrice contenant les fréquences TF-IDF des mots de chaque document du dossier et une list avec les mots dans le meme ordre que la matricela fonction"""
     documents = listOfFiles(directory, "txt")
     matrice = []
     for document in documents:
@@ -37,7 +40,8 @@ def matTF_IDF(directory):
             doc = speech.read()
             tf_idfMot= tf_idf(directory)
             ligne = [mot for mot in tf_idfMot.keys()]
-            for mot in doc.split(" "):
-                ligne.append(tf_idfMot[mot])
-            matrice.append(ligne)
-    return matrice
+            listMot=list(tf_idfMot.keys())
+    return matrice,listMot
+
+
+
