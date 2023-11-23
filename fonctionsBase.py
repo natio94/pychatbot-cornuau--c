@@ -22,6 +22,24 @@ def listPresident():
             presidents[president]=""
     return presidents
 
+def associerNomPrenom():
+    """Associe les noms des president à leurs prenoms """
+    nomPrenomPresident = {}
+    for nomPresident in listPresident():
+        if nomPresident == "Macron":
+            nomPrenomPresident[nomPresident]="Emmanuel"
+        elif nomPresident == "Hollande":
+            nomPrenomPresident[nomPresident]="François"
+        elif nomPresident ==  "Sarkozy":
+            nomPrenomPresident[nomPresident]="Nicolas"
+        elif nomPresident == "Chirac":
+            nomPrenomPresident[nomPresident]="Jacques"
+        elif nomPresident == "Mitterand":
+            nomPrenomPresident[nomPresident]="François"
+        elif nomPresident == "Giscard dEstaing":
+            nomPrenomPresident[nomPresident]="Valerie"
+    return nomPrenomPresident
+
 
 def fichiersToMin():
     """Permet de convertir les 8 fichiers dans le dossiers speeches en minuscule et les enregistre dans le dossier cleaned"""
