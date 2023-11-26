@@ -20,13 +20,13 @@ def scoreIDF(directory:str):
     for document in documents:
         with open(directory + "\\" + document, "r",encoding="utf-8") as speech:
             doc = speech.read()
-            for mot in doc.split(" "):
+            for mot in set(doc.split(" ")):
                 if mot not in freqInv:
                     freqInv[mot] = 1
                 else:
                     freqInv[mot] += 1
     for mot in freqInv.keys():
-        freqInv[mot]=log(len(documents)/freqInv[mot]+1)
+        freqInv[mot]=log(len(documents)/freqInv[mot])
     return freqInv
 
 
@@ -58,7 +58,7 @@ def motsMoinsImportants(directory):
 
     for i in range(len(listMot)):
         score_total = sum(matrice[j][i] for j in range(len(matrice)))
-        if score_total == 0:
+        if score_total==0:
             mots_non_importants.append(listMot[i])
 
     return mots_non_importants
