@@ -35,20 +35,19 @@ def matTF_IDF(directory:str):
     documents = listOfFiles(directory, "txt")
     matrice = []
     for document in documents:
-        with open(directory + "\\" + document, "r",encoding="utf-8") as speech:
-            doc = speech.read()
-            colonne = []
 
-            freqInv=scoreIDF(directory)
-            freq=scoreTF(document)
-            for mot in freqInv.keys():
-                if mot in freq.keys():
-                    score=freq[mot]*freqInv[mot]
-                else:
-                    score=0
-                colonne.append(score)
-            matrice.append(colonne)
-            listMot=list(freqInv.keys())
+        colonne = []
+
+        freqInv=scoreIDF(directory)
+        freq=scoreTF(document)
+        for mot in freqInv.keys():
+            if mot in freq.keys():
+                score=freq[mot]*freqInv[mot]
+            else:
+                score=0
+            colonne.append(score)
+        matrice.append(colonne)
+        listMot=list(freqInv.keys())
     return matrice,listMot
 
 
