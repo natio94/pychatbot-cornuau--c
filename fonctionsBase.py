@@ -50,3 +50,5 @@ def reloadTexte():
 
         with open(".\cleaned\\" + file, "w",encoding="utf-8") as speech:
             speech.write(speechTexte)
+
+

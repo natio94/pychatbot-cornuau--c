@@ -51,3 +51,66 @@ def matTF_IDF(directory:str):
             listMot=list(freqInv.keys())
     return matrice,listMot
 
+
+def motsMoinsImportants(directory):
+    matrice, listMot = matTF_IDF(directory)
+    mots_non_importants = []
+
+    for i in range(len(listMot)):
+        score_total = sum(matrice[j][i] for j in range(len(matrice)))
+        if score_total == 0:
+            mots_non_importants.append(listMot[i])
+
+    return mots_non_importants
+
+
+def motPlusElevéTFIDF(directory):
+    matrice, listMot = matTF_IDF(directory)
+    mots_max_tfidf = []
+
+    for i in range(len(listMot)):
+        scores = [matrice[j][i] for j in range(len(matrice))]
+        if max(scores) > 0:
+            mots_max_tfidf.append((listMot[i], max(scores)))
+
+    mots_max_tfidf.sort(key=lambda x: x[1], reverse=True)
+    return mots_max_tfidf
+
+
+def presidentsParlantDeNation(directory, mot="nation"):
+    documents = listOfFiles(directory, "txt")
+    presidents_occurrences = {}
+
+    for document in documents:
+        with open(directory + "\\" + document, "r", encoding="utf-8") as speech:
+            doc = speech.read().lower()
+            if mot in doc:
+                president = document.split("_")[1][:-4]
+                if president not in presidents_occurrences:
+                    presidents_occurrences[president] = doc.count(mot)
+
+    presidents_occurrences = sorted(presidents_occurrences.items(), key=lambda x: x[1], reverse=True)
+    return presidents_occurrences
+
+
+def premierPresidentParlantDeClimatEcologie(directory, mots=["climat", "écologie"]):
+    documents = listOfFiles(directory, "txt")
+
+    for document in documents:
+        with open(directory + "\\" + document, "r", encoding="utf-8") as speech:
+            doc = speech.read().lower()
+            if any(mot in doc for mot in mots):
+                president = document.split("_")[1][:-4]
+                return president
+
+def motsEvoquesParTous(directory, mots_non_importants):
+    documents = listOfFiles(directory, "txt")
+    mots_evoques_tous = set()
+
+    for document in documents:
+        with open(directory + "\\" + document, "r", encoding="utf-8") as speech:
+            doc = speech.read().lower().split()
+
+            mots_evoques_tous.update(set(doc) - set(mots_non_importants))
+
+    return list(mots_evoques_tous)
