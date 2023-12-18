@@ -72,7 +72,7 @@ def motPlusEleveTFIDF(directory:str):
             mots_max_tfidf.append((listMot[i], max(scores)))
 
     mots_max_tfidf.sort(key=lambda x: x[1], reverse=True)
-    return mots_max_tfidf
+    return mots_max_tfidf[0]
 
 
 def presidentsParlantDeMot(directory:str, mot:str):
