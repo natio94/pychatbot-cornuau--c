@@ -1,5 +1,4 @@
-
-rep=input("Quel fonction voulez vous utiliser ?\n1:fonctions de base\n2:fonctions TF_IDF\n")
+rep=input("Quel fonction voulez vous utiliser ?\n1:fonctions de base\n2:fonctions TF_IDF\n3:partie 2\n")
 #fonctions de base
 if rep=="1":
     from fonctionsBase import *
@@ -32,3 +31,15 @@ elif rep=="2":
         print(premierPresidentParlantDeMots("./cleaned",mots))
     elif rep=="5":
         print(motsEvoquesParTous())
+#fonctions de la partie 2
+elif rep=="3":
+    from partie2 import *
+    rep=input()
+    if rep=="1":
+        print(tokenQuestion("Quel est le nom du président de la France ?"))
+    if rep=='2':
+        print(recherche(tokenQuestion("Quel est le nom du président de la France ?"),"./cleaned"))
+    if rep=="3":
+        print(vectorisation(recherche(tokenQuestion("Quel est le nom du président de la France ?"),"./cleaned")))
+    if rep=="4":
+        print(affinageRep("Comment une nation peut-elle prendre soin du climat ?"))
