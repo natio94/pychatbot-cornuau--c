@@ -111,7 +111,8 @@ def presidentsParlantDeMot(directory:str, mot:str):
 def premierPresidentParlantDeMots(directory:str, mots:list):
     """Retourne le premier président parlant d'une list de mot donnée"""
     documents = listOfFiles(directory, "txt")
-
+    ordrePresChrono = ["Giscard dEstaing", "Mitterand", "Chirac", "Sarkozy", "Hollande", "Macron"]
+    president = []
     for document in documents:
         with open(directory + "\\" + document, "r", encoding="utf-8") as speech:
             docu = speech.read()
